@@ -1,0 +1,30 @@
+nav{
+  margin-left: 50px;
+}
+nav a {
+  text-decoration: none;
+  display: inline-block;
+  margin: 3px;
+  padding: 5px 20px;
+  border: 1px solid #424242;
+  color: #ccc;
+}
+nav a:last-child{
+  position: relative;
+  left: 100px;
+  color: #777;
+}
+nav a:hover{
+  color: #d10000;
+  background: #666666;
+}
+nav a.selected{
+  color: #d10000;
+  background: #424242;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 600px;
+  min-width: 300px;
+}

@@ -1,1 +1,27 @@
-<p>login-page works!</p>
+<mat-grid-list cols="3" rowHeight="1:1">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Login</mat-card-title>
+      <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" >
+        <mat-error *ngIf="auth.error$ | async as error">
+          {{error}}
+        </mat-error>
+        <mat-form-field class="example-full-width">
+          <input id="login" matInput formControlName="login" placeholder="Login">
+        </mat-form-field>
+        <div *ngIf="checkError('login' ,'required')">
+          Обовязкове поле.
+        </div>
+        <mat-form-field class="example-full-width">
+          <input matInput type="password" id="password"  formControlName="password" placeholder="Password">
+        </mat-form-field>
+        <div *ngIf="checkError('password' ,'required')">
+          Обовязкове поле.
+        </div>
+        <button mat-button [disabled]="loginForm.invalid" >Login</button>
+      </form>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
