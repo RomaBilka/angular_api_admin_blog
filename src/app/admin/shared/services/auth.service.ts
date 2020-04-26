@@ -2,29 +2,31 @@ import { Injectable } from '@angular/core';
 import {LoginUser, Token } from '../interfaces';
 import {catchError, tap} from 'rxjs/operators';
 import { ApiService } from './api.service';
+import { TokenService } from './token.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Subject, throwError} from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private tokenStore: TokenService) { }
   public  error$: Subject<string> = new Subject<string>();
-  login(loginUser: LoginUser){
+
+  public isAuthenticated(): boolean {
+    return !!this.tokenStore.token;
+  }
+
+  public login(loginUser: LoginUser){
     this.api.login( loginUser ).pipe(
-      tap(this.setToken),
+      tap((response: Token) => { this.tokenStore.token = response.token; }),
       catchError(this.handleError.bind(this))
     ).subscribe();
   }
-  setToken(response: Token): void{
-    sessionStorage.setItem('token', response.token);
-  }
-  logout(): void{
+
+  public logout(): void{
     sessionStorage.clear();
   }
-  get token(): string{
-    return sessionStorage.getItem('token');
-  }
+
   private handleError(error: HttpErrorResponse){
     switch (error.status) {
       case 422:
