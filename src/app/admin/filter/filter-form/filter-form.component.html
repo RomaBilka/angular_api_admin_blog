@@ -1,1 +1,32 @@
-<p>filter-form works!</p>
+<mat-card>
+  <div class="container" *ngIf="filterData">
+    <mat-card-title *ngIf="filterData.name.length; else new">{{filterData.name}}</mat-card-title>
+    <ng-template #new>
+      <mat-card-title >New Filter</mat-card-title>
+    </ng-template>
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm)" >
+      <div>
+        <mat-form-field class="example-full-width">
+          <input id="name" matInput formControlName="name" placeholder="Name">
+        </mat-form-field>
+        <div *ngIf="checkError('name' ,'required')">
+          Обовязкове поле.
+        </div>
+      </div>
+      <div>
+        <mat-form-field class="example-full-width">
+          <input id="order" matInput formControlName="order" placeholder="Order">
+        </mat-form-field>
+        <div *ngIf="checkError('order' ,'required')">
+          Обовязкове поле.
+        </div>
+      </div>
+
+      <div>
+        <mat-slide-toggle formControlName="status">Status</mat-slide-toggle>
+      </div>
+
+      <button mat-button [disabled]="filterForm.invalid" >Save</button>
+    </form>
+  </div>
+</mat-card>
