@@ -3,7 +3,7 @@
     <a routerLink="/images" routerLinkActive="selected" ><mat-icon>image</mat-icon>Images</a>
     <a routerLink="/filters" routerLinkActive="selected"><mat-icon>filter_vintage</mat-icon>Filters</a>
     <a routerLink="/users" routerLinkActive="selected"><mat-icon>person_outline</mat-icon>Users</a>
-    <a routerLink="/logouth" routerLinkActive="selected"><mat-icon>visibility_off</mat-icon>Logout</a>
+    <a  routerLinkActive="selected" (click)="logout()"><mat-icon>visibility_off</mat-icon>Logout</a>
   </nav>
 </mat-toolbar>
 <router-outlet></router-outlet>

@@ -6,3 +6,7 @@ export interface LoginUser {
 export interface Token {
   token: string;
 }
+
+export interface File {
+  name: string;
+}

@@ -5,11 +5,16 @@ import { ApiService } from './api.service';
 import { TokenService } from './token.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Subject, throwError} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private api: ApiService, private tokenStore: TokenService) { }
+  constructor(
+    private api: ApiService,
+    private tokenStore: TokenService,
+    private router: Router
+  ) { }
   public  error$: Subject<string> = new Subject<string>();
 
   public isAuthenticated(): boolean {
@@ -18,13 +23,17 @@ export class AuthService {
 
   public login(loginUser: LoginUser){
     this.api.login( loginUser ).pipe(
-      tap((response: Token) => { this.tokenStore.token = response.token; }),
+      tap((response: Token) => {
+        this.tokenStore.token = response.token;
+        this.router.navigate(['/', 'images']);
+      }),
       catchError(this.handleError.bind(this))
     ).subscribe();
   }
 
   public logout(): void{
     sessionStorage.clear();
+    this.router.navigate(['/', 'login']);
   }
 
   private handleError(error: HttpErrorResponse){
