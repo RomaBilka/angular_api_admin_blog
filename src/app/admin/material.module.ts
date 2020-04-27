@@ -7,10 +7,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -24,7 +26,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatButtonToggleModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatIconModule,
@@ -37,7 +42,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatButtonToggleModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }
