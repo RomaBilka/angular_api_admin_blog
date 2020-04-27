@@ -13,6 +13,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { ApiService } from './shared/services/api.service';
 import { AuthService } from './shared/services/auth.service';
 import { ImageService } from './image/image.service';
+import { FilterService } from './filter/filter.service';
+import { UserService } from './user/user.service';
 
 import { TokenService } from './shared/services/token.service';
 import {ImageListComponent} from './image/image-list/image-list.component';
@@ -47,8 +49,11 @@ import {UserFormComponent} from './user/user-form/user-form.component';
           {path: 'filters', component: FilterListComponent},
           {path: 'users', component: UserListComponent},
           {path: 'image/:id', component: ImageFormComponent},
+          {path: 'image', component: ImageFormComponent},
           {path: 'filter/:id', component: FilterFormComponent},
+          {path: 'filter', component: FilterFormComponent},
           {path: 'user/:id', component: UserFormComponent},
+          {path: 'user', component: UserFormComponent},
         ]
       }
     ]),
@@ -61,7 +66,9 @@ import {UserFormComponent} from './user/user-form/user-form.component';
     ApiService,
     AuthService,
     TokenService,
-    ImageService
+    ImageService,
+    FilterService,
+    UserService
   ]
 })
 export class AdminModule { }
