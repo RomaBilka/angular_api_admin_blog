@@ -1,1 +1,34 @@
-<p>user-form works!</p>
+<mat-card>
+  <div class="container" *ngIf="userData">
+    <mat-card-title *ngIf="userData.name.length; else new">{{userData.name}}</mat-card-title>
+    <ng-template #new>
+      <mat-card-title >New User</mat-card-title>
+    </ng-template>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" >
+      <div>
+        <mat-form-field class="example-full-width">
+          <input id="name" matInput formControlName="name" placeholder="Name">
+        </mat-form-field>
+        <div *ngIf="checkError('name' ,'required')">
+          Обовязкове поле.
+        </div>
+      </div>
+      <div>
+        <mat-form-field class="example-full-width">
+          <input id="login" matInput formControlName="login" placeholder="Login">
+        </mat-form-field>
+        <div *ngIf="checkError('login' ,'required')">
+          Обовязкове поле.
+        </div>
+      </div>
+
+      <div>
+        <mat-form-field class="example-full-width">
+          <input id="password" matInput formControlName="password" placeholder="password">
+        </mat-form-field>
+      </div>
+
+      <button mat-button [disabled]="userForm.invalid" >Save</button>
+    </form>
+  </div>
+</mat-card>

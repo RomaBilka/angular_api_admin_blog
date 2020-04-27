@@ -9,13 +9,26 @@ export class UserService {
 
   constructor(private api: ApiService) { }
 
-  public getFilters(): Observable<User[]>{
+  public getUsers(): Observable<User[]>{
     return this.api.getUsers().pipe(
       map(this.extractUsers)
     );
   }
-  public deleteFilter(id: number): Observable<any>{
-    return this.api.deleteFilter(id).pipe();
+  public getUser(id: number): Observable<User>{
+    return this.api.getUser(id).pipe(
+      map((user) => {
+        return new User(user);
+      })
+    );
+  }
+  public addUser(user: User): Observable<void>{
+    return this.api.createUser(user).pipe();
+  }
+  public updateUser(user: User): Observable<void>{
+    return this.api.updateUser(user).pipe();
+  }
+  public deleteUser(id: number): Observable<void>{
+    return this.api.deleteUser(id).pipe();
   }
   private extractUsers(response: any) {
     const users: User[] = [];

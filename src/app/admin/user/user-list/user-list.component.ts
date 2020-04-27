@@ -2,9 +2,10 @@ import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {User} from '../../user/user';
 import {UserService} from '../../user/user.service';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-user-list',
@@ -31,12 +32,12 @@ export class UserListComponent implements OnInit, AfterViewInit {
   }
 
   public getList(){
-    this.user.getFilters().subscribe(users => {
+    this.user.getUsers().subscribe(users => {
       this.dataSource.data = users;
     });
   }
   public deleteUser(id: number){
-    this.user.deleteFilter(id).subscribe( () => {
+    this.user.deleteUser(id).subscribe( () => {
       this.ngOnInit();
     });
   }
