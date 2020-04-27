@@ -14,7 +14,7 @@
 
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef  mat-sort-header> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element">  {{element.name}} </mat-cell>
+        <mat-cell *matCellDef="let element">  <a routerLink="/image/{{element.id}}">{{element.name}}</a> </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="order">
@@ -43,6 +43,12 @@
                    [pageSizeOptions]="[10, 20, 30, 40, 50]"
                    [showFirstLastButtons]="true">
     </mat-paginator>
+    <button mat-button
+            class="btn btn-link open"
+            [routerLink]="['/image']"
+    >
+      Add Image
+    </button>
 
   </div>
 </mat-card>

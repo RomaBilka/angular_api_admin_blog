@@ -3,14 +3,17 @@ export class Image {
   public name: string;
   public order: number;
   public status: number;
-  public filters?: any;
+  public filters?: Array<number>;
 
   constructor(data) {
     this.id = data.id;
     this.name = data.name;
     this.order = data.order;
     this.status = data.status;
-    this.filters = data.filters;
+    this.filters = [];
+    if (data.filters) {
+      data.filters.forEach(filter => this.filters.push(filter.id));
+    }
   }
 }
 

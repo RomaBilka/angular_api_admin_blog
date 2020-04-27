@@ -26,7 +26,7 @@ export class ImageListComponent implements OnInit, AfterViewInit {
     this.getList();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

@@ -1,1 +1,52 @@
-<p>image-form works!</p>
+<mat-card>
+  <div class="container" *ngIf="imageData && pageData">
+
+    <div *ngIf="imageData.name.length; else new">
+      <mat-card-title >{{imageData.name}}</mat-card-title>
+        <img src="http://localhost:3000/assets/image/300/{{imageData.name}}" />
+      <br />
+        <mat-button-toggle (click)="deleteImage()" ><mat-icon>delete</mat-icon></mat-button-toggle>
+    </div>
+    <ng-template #new>
+      <div *ngIf="!uploaded; else spinner">
+        <mat-card-title>New Image</mat-card-title>
+        <input #InputImage hidden="true" type="file" onclick="this.value=null" (change)="uploadImage($event)" />
+        <button mat-button (click)="InputImage.click()"><mat-icon>cloud_upload</mat-icon>Upload Image</button>
+      </div>
+      <ng-template #spinner>
+        <mat-spinner></mat-spinner>
+      </ng-template>
+    </ng-template>
+
+    <form [formGroup]="imageForm" (ngSubmit)="onSubmit(imageForm)" >
+      <div>
+        <mat-form-field class="example-full-width">
+          <input id="name" matInput formControlName="name" placeholder="Name">
+        </mat-form-field>
+        <div *ngIf="checkError('name' ,'required')">
+          Обовязкове поле.
+        </div>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Filters</mat-label>
+          <mat-select formControlName="filters" multiple>
+            <mat-option *ngFor="let f of pageData?.filters" [value]="f.id">{{f.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="example-full-width">
+          <input id="order" matInput formControlName="order" placeholder="Order">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-slide-toggle formControlName="status">Status</mat-slide-toggle>
+      </div>
+
+      <button mat-button [disabled]="imageForm.invalid" >Save</button>
+    </form>
+  </div>
+</mat-card>
