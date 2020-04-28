@@ -15,6 +15,7 @@ import { AuthService } from './shared/services/auth.service';
 import { ImageService } from './image/image.service';
 import { FilterService } from './filter/filter.service';
 import { UserService } from './user/user.service';
+import { AuthGuard } from './shared/services/auth.guard';
 
 import { TokenService } from './shared/services/token.service';
 import {ImageListComponent} from './image/image-list/image-list.component';
@@ -45,15 +46,15 @@ import {UserFormComponent} from './user/user-form/user-form.component';
         path: '', component: AdminLoyautComponent, children: [
           {path: '', redirectTo: 'login', pathMatch: 'full'},
           {path: 'login', component: LoginPageComponent},
-          {path: 'images', component: ImageListComponent},
-          {path: 'filters', component: FilterListComponent},
-          {path: 'users', component: UserListComponent},
-          {path: 'image/:id', component: ImageFormComponent},
-          {path: 'image', component: ImageFormComponent},
-          {path: 'filter/:id', component: FilterFormComponent},
-          {path: 'filter', component: FilterFormComponent},
-          {path: 'user/:id', component: UserFormComponent},
-          {path: 'user', component: UserFormComponent},
+          {path: 'images', component: ImageListComponent, canActivate: [AuthGuard]},
+          {path: 'filters', component: FilterListComponent, canActivate: [AuthGuard]},
+          {path: 'users', component: UserListComponent, canActivate: [AuthGuard]},
+          {path: 'image/:id', component: ImageFormComponent, canActivate: [AuthGuard]},
+          {path: 'image', component: ImageFormComponent, canActivate: [AuthGuard]},
+          {path: 'filter/:id', component: FilterFormComponent, canActivate: [AuthGuard]},
+          {path: 'filter', component: FilterFormComponent, canActivate: [AuthGuard]},
+          {path: 'user/:id', component: UserFormComponent, canActivate: [AuthGuard]},
+          {path: 'user', component: UserFormComponent, canActivate: [AuthGuard]},
         ]
       }
     ]),
@@ -68,7 +69,8 @@ import {UserFormComponent} from './user/user-form/user-form.component';
     TokenService,
     ImageService,
     FilterService,
-    UserService
+    UserService,
+    AuthGuard
   ]
 })
 export class AdminModule { }
